@@ -5,19 +5,19 @@ import test.models.Item;
 
 import java.util.Objects;
 
-public class MainHand extends Item implements Equipable {
+public class Body extends Item implements Equipable {
     private final EquipSlot slot;
     private final StatBonus bonusType;
     private final int       bonusValue;
 
-    public MainHand(String name, double weight, int bonusValue) {
+    public Body(String name, double weight, int bonusValue) {
         super(name, weight);
-        this.slot       = EquipSlot.MAIN_HAND;
-        this.bonusType  = StatBonus.DAMAGE;
+        this.slot       = EquipSlot.BODY;
+        this.bonusType  = StatBonus.ARMOR;
         this.bonusValue = bonusValue;
     }
 
-    public MainHand(String name, double weight, int bonusValue, EquipSlot slot, StatBonus bonusType) {
+    public Body(String name, double weight, int bonusValue, EquipSlot slot, StatBonus bonusType) {
         super(name, weight);
         this.slot       = slot;
         this.bonusType  = bonusType;
@@ -27,8 +27,8 @@ public class MainHand extends Item implements Equipable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof MainHand mainHand)) return false;
-        return slot == mainHand.slot;
+        if (!(o instanceof Body body)) return false;
+        return slot == body.slot;
     }
 
     @Override

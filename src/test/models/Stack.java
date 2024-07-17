@@ -1,13 +1,13 @@
 
 package test.models;
 
-public class Stack <T extends Item> {
-    private final T stack;
+public class Stack<T extends Item> {
+    private final T item;
 
     private int quantity;
 
-    public Stack(T stack, int quantity) {
-        this.stack = stack;
+    public Stack(T item, int quantity) {
+        this.item = item;
         this.quantity = quantity;
     }
 
@@ -18,12 +18,12 @@ public class Stack <T extends Item> {
     @Override
     public String toString() {
         return "Stack{" +
-                "stack=" + stack +
+                "item=" + item +
                 ", quantity=" + quantity +
                 '}';
     }
 
-    public T getStack() {
-        return stack;
+    public T getItem() {
+        return item;
     }
 }

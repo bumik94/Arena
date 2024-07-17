@@ -1,13 +1,22 @@
 package test.models;
 
 public interface Equipable {
-    public enum EquipSlot {
+    enum EquipSlot {
         MAIN_HAND,
         OFF_HAND,
-        BODY;
-
+        BODY
     }
 
-    EquipSlot getSLOT();
+    enum StatBonus {
+        HEALTH,
+        DAMAGE,
+        ARMOR
+    }
+
+    int getSlotOrdinal();
+
+    StatBonus getBonusType();
+
+    int getBonusValue();
 }
 

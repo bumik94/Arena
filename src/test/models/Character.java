@@ -1,40 +1,68 @@
 package test.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Character {
     private final String name;
 
     private int     maxHealth;
     private int     currentHealth;
-    private int     damagge = 0;
+    private int     damage;
+    private int     armor;
     private double  carryingCapacity;
-    private double  encumbrance = 0;
+    private double  encumbrance;
 
-    private ArrayList<Item>      inventory = new ArrayList<>();
-    private ArrayList<Equipable> equipment = new ArrayList<>();
+    private List<Item> inventory = new ArrayList<>();
+    private List<Equipable> equipment = new ArrayList<>();
 
-    public Character(String name, int health, double carryingCapacity) {
+    public Character(String name) {
         this.name               = name;
-        this.maxHealth          = health;
-        this.currentHealth      = health;
-        this.carryingCapacity   = carryingCapacity;
+        this.maxHealth          = 10;
+        this.currentHealth      = 10;
+        this.carryingCapacity   = 50;
+        this.encumbrance        = 0;
+        this.damage             = 0;
+        this.armor              = 0;
     }
 
     @Override
     public String toString() {
-        return "Character{" +
-                "name='" + name + '\'' +
-                ", maxHealth=" + maxHealth +
-                ", currentHealth=" + currentHealth +
-                ", carryingCapacity=" + carryingCapacity +
-                ", encumbrance=" + encumbrance +
-                ", inventory=" + inventory +
-                ", equipment=" + equipment +
-                '}';
+        return String.format("""
+                '%s'
+                damage      >%d<
+                armor       ]%d[
+                health      |%d/%d|
+                encumbrance (%.2f/%.2f)
+                Equipment   > %s
+                Inventory   > %s
+                """,
+                name,
+                damage,
+                armor,
+                currentHealth, maxHealth,
+                encumbrance, carryingCapacity,
+                equipment.toString(),
+                inventory.toString());
     }
 
     public <T extends Equipable> void equipItem(T item) {
-        equipment.add(item.getSLOT().ordinal(), item);
+        equipment.add(item.getSlotOrdinal(), item);
+
+        switch (item.getBonusType()) {
+            case DAMAGE -> this.damage     += item.getBonusValue();
+            case ARMOR  -> this.armor      += item.getBonusValue();
+            case HEALTH -> this.maxHealth  += item.getBonusValue();
+        }
+    }
+
+    public <T extends Equipable> void unequipItem(T item) {
+        equipment.remove(item);
+
+        switch (item.getBonusType()) {
+            case DAMAGE -> this.damage     -= item.getBonusValue();
+            case ARMOR  -> this.armor      -= item.getBonusValue();
+            case HEALTH -> this.maxHealth  -= item.getBonusValue();
+        }
     }
 }
