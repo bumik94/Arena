@@ -13,38 +13,77 @@ public class Main {
 
         System.out.println(player);
 
-        player.equipItem(new MainHand(
+        player.obtainItem(new MainHand(
                 "Sword",
                 4,
                 2));
 
-        player.equipItem(new OffHand(
-                "Shield",
-                2,
-                1));
-
-        player.equipItem(new Body(
-                "Armor",
-                10,
-                5));
-
         System.out.println(player);
 
-        player.unequipItem(new MainHand(
+        player.obtainItem(new MainHand(
                 "Sword",
                 4,
                 2));
 
-        player.unequipItem(new OffHand(
-                "Shield",
-                2,
-                1));
+        System.out.println(player);
 
-        player.unequipItem(new Body(
-                "Armor",
-                10,
-                5));
+        player.obtainItem(new MainHand(
+                "Sword",
+                4,
+                4,
+                2));
 
         System.out.println(player);
+
+        player.obtainItem(new MainHand(
+                "Sword",
+                4,
+                4,
+                2));
+
+        System.out.println(player);
+
+        player.obtainItem(new MainHand(
+                "Sword",
+                4,
+                4,
+                2));
+
+        System.out.println(player);
+
+//
+//        player.equipItem(new MainHand(
+//                "Sword",
+//                4,
+//                2));
+//
+//        player.equipItem(new OffHand(
+//                "Shield",
+//                2,
+//                1));
+//
+//        player.equipItem(new Body(
+//                "Armor",
+//                10,
+//                5));
+//
+//        System.out.println(player);
+//
+//        player.unequipItem(new MainHand(
+//                "Sword",
+//                4,
+//                2));
+//
+//        player.unequipItem(new OffHand(
+//                "Shield",
+//                2,
+//                1));
+//
+//        player.unequipItem(new Body(
+//                "Armor",
+//                10,
+//                5));
+//
+//        System.out.println(player);
     }
 }

@@ -5,23 +5,42 @@ import test.models.Item;
 
 import java.util.Objects;
 
-public class OffHand extends Item implements Equipable {
+public class OffHand extends Item implements Equipable, Comparable<Item> {
     private final EquipSlot slot;
     private final StatBonus bonusType;
     private final int       bonusValue;
 
     public OffHand(String name, double weight, int bonusValue) {
-        super(name, weight);
+        super(name, weight, 1);
         this.slot       = EquipSlot.OFF_HAND;
         this.bonusType  = StatBonus.ARMOR;
         this.bonusValue = bonusValue;
     }
 
     public OffHand(String name, double weight, int bonusValue, EquipSlot slot, StatBonus bonusType) {
-        super(name, weight);
+        super(name, weight, 1);
         this.slot       = slot;
         this.bonusType  = bonusType;
         this.bonusValue = bonusValue;
+    }
+
+    public OffHand(String name, double weight, int quantity, int bonusValue) {
+        super(name, weight, quantity);
+        this.slot       = EquipSlot.OFF_HAND;
+        this.bonusType  = StatBonus.ARMOR;
+        this.bonusValue = bonusValue;
+    }
+
+    public OffHand(String name, double weight, int quantity, int bonusValue, EquipSlot slot, StatBonus bonusType) {
+        super(name, weight, quantity);
+        this.slot       = slot;
+        this.bonusType  = bonusType;
+        this.bonusValue = bonusValue;
+    }
+
+    @Override
+    public int compareTo(Item o) {
+        return super.name().compareTo(o.name());
     }
 
     @Override
@@ -52,7 +71,7 @@ public class OffHand extends Item implements Equipable {
 
     @Override
     public String toString() {
-        return String.format("'%s' >%d< (%.2f)", super.name(), getBonusValue(), super.weight());
+        return String.format("'%s' >%d< (%.2f) %dx (%.2f)", super.name(), getBonusValue(), super.weight(), super.quantity(), super.totalWeight());
     }
 
     public OffHand item() {

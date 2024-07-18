@@ -1,15 +1,30 @@
 package test.models;
 
-import java.util.Comparator;
 import java.util.Objects;
 
-public abstract class Item {
+public abstract class Item implements Comparable<Item> {
     private final String name;
     private final double weight;
+
+    private int quantity;
 
     public Item(String name, double weight) {
         this.name = name;
         this.weight = weight;
+        this.quantity = 1;
+    }
+
+    public Item(String name, double weight, int quantity) {
+        this.name = name;
+        this.weight = weight;
+        this.quantity = quantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Item item)) return false;
+        return Objects.equals(name, item.name);
     }
 
     @Override
@@ -19,7 +34,7 @@ public abstract class Item {
 
     @Override
     public String toString() {
-        return String.format("'%s' |%.2f|", name, weight);
+        return String.format("'%s' (%.2f) %dx (%.2f)", name, weight, quantity, totalWeight());
     }
 
     public String name() {
@@ -30,26 +45,15 @@ public abstract class Item {
         return weight;
     }
 
-    public static class Stack <T extends Item> {
-        private final T item;
+    public int quantity() {
+        return quantity;
+    }
 
-        private int quantity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-        public Stack(T item, int quantity) {
-            this.item = item;
-            this.quantity = quantity;
-        }
-
-        public void setQuantity(int quantity) {
-            this.quantity = quantity;
-        }
-
-        @Override
-        public String toString() {
-            return "Stack{" +
-                    "stack=" + item +
-                    ", quantity=" + quantity +
-                    '}';
-        }
+    public double totalWeight() {
+        return weight * quantity;
     }
 }

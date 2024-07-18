@@ -1,12 +1,12 @@
 
 package test.models;
 
-public class Stack<T extends Item> {
+public class ItemStack<T extends Item> {
     private final T item;
 
     private int quantity;
 
-    public Stack(T item, int quantity) {
+    public ItemStack(T item, int quantity) {
         this.item = item;
         this.quantity = quantity;
     }
