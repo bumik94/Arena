@@ -15,6 +15,29 @@ public class Main {
 
         player.obtainItem(new MainHand(
                 "Sword",
+                5,
+                2));
+
+        System.out.println(player);
+
+        player.obtainItem(new MainHand(
+                "Dagger",
+                12,
+                2));
+
+        System.out.println(player);
+
+        player.obtainItem(new MainHand(
+                "Axe",
+                8,
+                4,
+                2));
+
+        System.out.println(player);
+
+        player.obtainItem(new MainHand(
+                "Mace",
+                3,
                 4,
                 2));
 
@@ -22,35 +45,21 @@ public class Main {
 
         player.obtainItem(new MainHand(
                 "Sword",
-                4,
+                21,
+                8,
                 2));
 
         System.out.println(player);
 
-        player.obtainItem(new MainHand(
+        player.printInventory();
+
+        player.disposeItem(new MainHand(
                 "Sword",
-                4,
-                4,
+                21,
+                8,
                 2));
 
-        System.out.println(player);
-
-        player.obtainItem(new MainHand(
-                "Sword",
-                4,
-                4,
-                2));
-
-        System.out.println(player);
-
-        player.obtainItem(new MainHand(
-                "Sword",
-                4,
-                4,
-                2));
-
-        System.out.println(player);
-
+        player.printInventory();
 //
 //        player.equipItem(new MainHand(
 //                "Sword",

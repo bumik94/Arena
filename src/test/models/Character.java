@@ -1,6 +1,7 @@
 package test.models;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Character {
@@ -82,5 +83,22 @@ public class Character {
             inventory.add(item);
         }
         encumbrance = inventory.get(inventory.indexOf(item)).totalWeight();
+    }
+
+    public void disposeItem(Item item) {
+        if (! inventory.contains(item)) {
+            return;
+        }
+//        Item existingItem = inventory.get(inventory.indexOf(item));
+        inventory.removeIf(o -> o.equals(item));
+    }
+
+    public void printInventory() {
+
+        inventory.sort(Comparator.comparing((Item o) -> Double.valueOf(o.weight())));
+        inventory.forEach(System.out::println);
+        System.out.println();
+        inventory.sort(Comparator.comparing((Item o) -> o.name()));
+        inventory.forEach(System.out::println);
     }
 }
