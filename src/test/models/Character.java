@@ -74,10 +74,6 @@ public class Character {
         return carryingCapacity - encumbrance;
     }
 
-public static <T> T operator(Operation<T> function, T value1, T value2) {
-        return function.operate(value1, value2);
-}
-
     public void currentInventoryEncumbrance() {
         encumbrance = 0;
         inventory.forEach(o -> encumbrance += o.totalWeight());
