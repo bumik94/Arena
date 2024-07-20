@@ -1,10 +1,5 @@
 package test.items;
 
-import test.models.Equipable;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public record Armory() {
 
 //    static List<MainHand> mainHands = new ArrayList<>(List.of(

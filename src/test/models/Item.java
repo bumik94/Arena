@@ -50,7 +50,7 @@ public abstract class Item implements Comparable<Item> {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        this.quantity += quantity;
     }
 
     public double totalWeight() {

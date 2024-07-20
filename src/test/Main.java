@@ -1,9 +1,7 @@
 package test;
 
-import test.items.Body;
 import test.items.MainHand;
 import test.models.Character;
-import test.items.OffHand;
 
 public class Main {
 
@@ -15,6 +13,7 @@ public class Main {
 
         player.obtainItem(new MainHand(
                 "Sword",
+                5,
                 5,
                 2));
 
@@ -43,23 +42,17 @@ public class Main {
 
         System.out.println(player);
 
-        player.obtainItem(new MainHand(
-                "Sword",
-                21,
-                8,
-                2));
-
-        System.out.println(player);
-
         player.printInventory();
-
+        System.out.println();
         player.disposeItem(new MainHand(
                 "Sword",
                 21,
-                8,
+                5,
                 2));
 
         player.printInventory();
+
+        System.out.println(player);
 //
 //        player.equipItem(new MainHand(
 //                "Sword",

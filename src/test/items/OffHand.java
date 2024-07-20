@@ -1,6 +1,6 @@
 package test.items;
 
-import test.models.Equipable;
+import test.interfaces.Equipable;
 import test.models.Item;
 
 import java.util.Objects;

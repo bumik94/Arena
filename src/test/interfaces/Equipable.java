@@ -1,4 +1,4 @@
-package test.models;
+package test.interfaces;
 
 public interface Equipable {
     enum EquipSlot {

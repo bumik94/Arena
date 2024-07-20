@@ -1,5 +1,8 @@
 package test.models;
 
+import test.interfaces.Equipable;
+import test.interfaces.Operation;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -58,7 +61,7 @@ public class Character {
     }
 
     public <T extends Equipable> void unequipItem(T item) {
-        equipment.remove(item);
+        equipment.removeIf(o -> equipment.contains(item));
 
         switch (item.getBonusType()) {
             case DAMAGE -> this.damage     -= item.getBonusValue();
@@ -69,6 +72,15 @@ public class Character {
 
     public double currentInventoryCapacity() {
         return carryingCapacity - encumbrance;
+    }
+
+public static <T> T operator(Operation<T> function, T value1, T value2) {
+        return function.operate(value1, value2);
+}
+
+    public void currentInventoryEncumbrance() {
+        encumbrance = 0;
+        inventory.forEach(o -> encumbrance += o.totalWeight());
     }
 
     public void obtainItem(Item item) {
@@ -82,23 +94,26 @@ public class Character {
         } else {
             inventory.add(item);
         }
-        encumbrance = inventory.get(inventory.indexOf(item)).totalWeight();
+        currentInventoryEncumbrance();
     }
 
-    public void disposeItem(Item item) {
-        if (! inventory.contains(item)) {
-            return;
-        }
-//        Item existingItem = inventory.get(inventory.indexOf(item));
-        inventory.removeIf(o -> o.equals(item));
+    public void disposeItem(Item item) throws IndexOutOfBoundsException {
+        inventory.removeIf(o ->
+                o.name().equals(item.name()) &&
+                o.quantity() <= item.quantity());
+
+        try { inventory.get(inventory.indexOf(item)).setQuantity(-item.quantity()); }
+        catch (Exception ignored) {}
+
+        currentInventoryEncumbrance();
     }
 
     public void printInventory() {
 
-        inventory.sort(Comparator.comparing((Item o) -> Double.valueOf(o.weight())));
+        inventory.sort(Comparator.comparing(Item::weight));
         inventory.forEach(System.out::println);
         System.out.println();
-        inventory.sort(Comparator.comparing((Item o) -> o.name()));
+        inventory.sort(Comparator.comparing(Item::name));
         inventory.forEach(System.out::println);
     }
 }
